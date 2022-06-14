@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call方法</title>
+</head>
+<body>
+    <script>
+        var fn=function(x,y){
+            console.log('111');
+            console.log(this);
+            console.log(x+y);
+        }
+        var obj={
+            name:'andy'
+        }
+        // fn();
+        // 1. call()可以调用函数// fn.cal1();
+        // 2. call(）可以改变这个函数的this指向此时这个函数的this就指向了o这个对象
+        fn.call();
+        fn.call(obj,1,2);
+        /////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+        function Father(uname,age){
+            this.uname=uname;
+            this.age=age;
+        }
+        // /如果利用对象的形式修改了原型对象,别忘了利用constructor指回原来的构造函数
+        //添加方法
+        Father.prototype.money=function(){
+            console.log('我要赚钱');
+        }
+        function Son(uname,age,score){
+            Father.call(this,uname,age);
+            this.score=score;
+        }
+        
+        Son.prototype=new Father();
+        Son.prototype.constructor=Son;
+        //子原型对象可以通过等于父级元素实例化对象来实现调用父类原型对象的方法，这样不论怎么修改子原型对象都不会对父原型对象产生影响
+        var father=new Father('lll',30);
+        var son=new Son('Tommyliu',23,100);
+
+        console.log(son);
+        console.log(father);
+        console.log(Son);
+        console.log(Father);
+        console.log(Son.prototype.constructor);
+     
+        //forEach
+        var arr =[1,2,3];
+        arr.forEach(function(value,index, array){
+            console.log('每个数组元素'+value);
+            console.log('每个数组元素的索引号'+index);
+            console.log('数组本身'+ array);
+
+        })
+        var Arr=[];
+        Arr=arr.filter(function(value,index){
+            return value >=2;
+            //返回一个新数组
+
+        })
+        console.log(Arr);
+        ////////////////////////////////////////////////////////////////
+        // some()方法用于检测数组中的元素是否满足指定条件.通俗点查找数组中是否有满足条件的元素
+        // ●注意它返回值是布尔值,如果查找到这个元素,就返回true，如果查找不到就返回false.
+        // ●如果找到第一个满足条件的元素,则终止循环不在继续查找.
+        // currentvalue:数组当前项的值index:数组当前项的索引arr:数组对象本身
+        var arr1=['pink','red','green'];
+        var flag=arr1.some(function(value,index){
+            return value=='red';
+            
+        })
+        console.log(flag);
+        //////////////////////////////////////////////.tirm()方法去除字符串两边的空格
+    </script>
+</body>
+</html>

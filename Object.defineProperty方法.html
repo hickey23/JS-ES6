@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.defineProperty方法</title>
+</head>
+<body>
+    <script>
+        //函数也属于对象，是Function的实例
+        var obj={
+            id:1,
+            name:'小米',
+            price:999,
+        }
+        console.log(obj);
+        Object.defineProperty(obj,'num',{
+            value:1000,
+            
+        })
+        Object.defineProperty(obj,'price',{
+            value:1,
+        })
+        console.log(obj);
+        Object.defineProperty(obj,'id',{
+            writable:false,
+        })
+        obj.id=2;
+        console.log(obj);
+        // Object.defineProperty()第三个参数descriptor说明︰以对象形式{}书写
+        // value:设置属性的值默认为undefined
+        // writable:值是否可以重写。true | false 默认为false
+        // enumerable:目标属性是否可以被枚举。true | false默认为 false
+        // configurable:目标属性是否可以被册除或是否可以再次修改特性true | false 默认为false,不允许在修改第三个参数里面的特性
+        ///////obj.key()遍历对象，返回结果，返回对象中每一项key的结果/////////////
+        Object.defineProperty(obj,'address',{
+            value:'湖北武汉市',
+            writable:false,
+            // enumerable如果值为false则，不允许遍历，默认值是false
+            enumerable:false,
+        })
+        console.log(Object.keys(obj));//这里不显示num因为num里面的enumerate是默认false，改为true即可显示
+        delete obj.name;//删除类(对象)中的key
+    </script>
+</body>
+</html>
